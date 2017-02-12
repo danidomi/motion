@@ -3,11 +3,15 @@ Motion
 
 ## Motin Configuration in Raspberry Pi
 Download only for WINDOWS - https://sourceforge.net/projects/win32diskimager
+
 Download raspbian link - https://downloads.raspberrypi.org/raspbian_lite_latest
 
 After writting the image to SD Card, from the command line login using pi as username and raspberry as password
+
+
+
 ```
->wget https://www.dropbox.com/s/3qwbwithjfejmqe/motion.zip
+>wget https://github.com/danidomi/motion/releases/download/release/motion.zip
 >unzip motion.zip
 >cd motion
 >sudo apt-get install -y libjpeg-dev libavformat56 libavformat-dev libavcodec56 libavcodec-dev libavutil54 libavutil-dev libc6-dev zlib1g-dev libmysqlclient18 libmysqlclient-dev libpq5 libpq-dev
