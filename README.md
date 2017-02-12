@@ -2,7 +2,7 @@ Motion
 =============
 
 ## Motin Configuration in Raspberry Pi
-Download only for WINDOWS - https://sourceforge.net/projects/win32diskimager/ 
+Download only for WINDOWS - https://sourceforge.net/projects/win32diskimager
 Download raspbian link - https://downloads.raspberrypi.org/raspbian_lite_latest
 
 After writting the image to SD Card, from the command line login using pi as username and raspberry as password
@@ -65,6 +65,6 @@ wget --no-check-certificate -O - https://freedns.afraid.org/dynamic/update.php?X
 
 To follow up your Raspberry Pi Camera from any place, you just need to have internet and the following application:
 
-https://play.google.com/store/apps/details?id=de.twolazy.motion.monitor
+https://play.google.com/store/apps/details?id=de.twolazy.monitor
 
 Just configure with the information above and enjoy
