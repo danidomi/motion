@@ -1,42 +1,70 @@
 Motion
 =============
 
-## Status
-The build status from travis-ci for the master branch is: [![Build Status](https://travis-ci.org/Motion-Project/motion.svg?branch=master)](https://travis-ci.org/Motion-Project/motion)
+## Motin Configuration in Raspberry Pi
+Download only for WINDOWS - https://sourceforge.net/projects/win32diskimager/ 
+Download raspbian link - https://downloads.raspberrypi.org/raspbian_lite_latest
 
-## Description
+After writting the image to SD Card, from the command line login using pi as username and raspberry as password
+```
+>wget https://www.dropbox.com/s/3qwbwithjfejmqe/motion.zip
+>unzip motion.zip
+>cd motion
+>sudo apt-get install -y libjpeg-dev libavformat56 libavformat-dev libavcodec56 libavcodec-dev libavutil54 libavutil-dev libc6-dev zlib1g-dev libmysqlclient18 libmysqlclient-dev libpq5 libpq-dev
+>sudo apt-get install nginx
+>sudo apt-get install apache2-utils
+>sudo htpasswd -c /home/pi/.htpasswd admin 
+```
 
-Motion is a program that monitors the video signal from one or more cameras and
-is able to detect if a significant part of the picture has changed. Or in other
-words, it can detect motion.
+Add a cronjob to check if the motion camera is online
+ 
+```
+>crontab -e 
+*/1 * * * * pgrep motion || /home/pi/motion/startmotion
+```
 
-## Documentation
+You wont even need to start it
 
-The documentation for Motion is contained within the file motion_guide.html.
 
-The offline version of this file is available in the **doc/motion** directory.  The 
-online version of the motion_guide.html file is within the master branch and can be viewed [here](http://htmlpreview.github.com/?https://github.com/Motion-Project/motion/blob/master/motion_guide.html)
+## Nginx Configuration in Raspberry Pi
 
-In addition to the detailed building instructions included within the guide, the 
-INSTALL file contains abbreviated building instructions.
+>sudo apt-get install nginx
+>sudo apt-get install apache2-utils
+>sudo htpasswd -c /home/pi/.htpasswd admin
+>vi /etc/nginx/sites-available/default
 
-## Resources
 
-Please join the mailing list [here](https://lists.sourceforge.net/lists/listinfo/motion-user)
+Add the following code below to it
+```
+location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+                auth_basic “Restricted”;
+                auth_basic_user_file /home/pi/.htpasswd;
+                proxy_pass http://127.0.0.1:8081/img/video.mjpeg;
+        }
+```
 
-We prefer support through the mailing list because more people will have the benefit from the answers.
-A archive of mailing list discussions can be viewed [here](https://sourceforge.net/p/motion/mailman/motion-user/)
+And start the service
 
-## License
+```
+>sudo service nginx start
+```
 
-Motion is mainly distributed under the GNU GENERAL PUBLIC LICENSE (GPL) version 2 or later.
-See the copyright file for a list of all the licensing terms of the various components of Motion.
+## FreeDNS Configuration in Raspberry Pi
 
-The file CREDITS lists the many people who have contributed to Motion over the years.
+Create an account if you don't have it
 
-## Contributing
+```
+#!/bin/sh
+wget --no-check-certificate -O - https://freedns.afraid.org/dynamic/update.php?XXXXXXXXXXXXX >> /tmp/XXXXXXXXXXXXX.log 2>&1 &
+```
 
-Issues and Patches should be submitted via github and include detail descriptions
-of the issue being addressed as well as any documentation updates that would be
-needed with the change.
+## Android Configuration in Raspberry Pi
 
+To follow up your Raspberry Pi Camera from any place, you just need to have internet and the following application:
+
+https://play.google.com/store/apps/details?id=de.twolazy.motion.monitor
+
+Just configure with the information above and enjoy
