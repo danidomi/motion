@@ -58,7 +58,13 @@ And start the service
 
 ## FreeDNS Configuration in Raspberry Pi
 
-Create an account if you don't have it
+Create an account if you don't have it 
+
+```
+>vi ~/updatedns.sh
+```
+
+Copy the below content to it.
 
 ```
 #!/bin/sh
