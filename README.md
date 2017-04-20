@@ -13,7 +13,7 @@ After writting the image to SD Card, from the command line login using pi as use
 ```
 >wget https://github.com/danidomi/motion/releases/download/release/motion.zip
 >unzip motion.zip
->cd motion
+>cd mmal
 >sudo apt-get install -y libjpeg-dev libavformat56 libavformat-dev libavcodec56 libavcodec-dev libavutil54 libavutil-dev libc6-dev zlib1g-dev libmysqlclient18 libmysqlclient-dev libpq5 libpq-dev
 >sudo apt-get install nginx
 >sudo apt-get install apache2-utils
@@ -23,8 +23,8 @@ After writting the image to SD Card, from the command line login using pi as use
 Add a cronjob to check if the motion camera is online
  
 ```
->crontab -e 
-*/1 * * * * pgrep motion || /home/pi/motion/startmotion
+>sudo crontab -e 
+*/1 * * * * pgrep motion || /home/pi/mmal/startmotion
 ```
 
 You wont even need to start it
